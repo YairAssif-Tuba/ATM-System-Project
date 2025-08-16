@@ -1,12 +1,9 @@
-runtime: python39
+runtime: python311
 entrypoint: gunicorn -b :$PORT app:app
 
-instance_class: F1
-
-automatic_scaling:
-  target_cpu_utilization: 0.6
-  min_instances: 1
-  max_instances: 10
+# Force single instance to prevent TOCTOU issues with in-memory storage
+manual_scaling:
+  instances: 1
 
 env_variables:
   FLASK_ENV: production
