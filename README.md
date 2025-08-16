@@ -52,7 +52,7 @@ The most difficult challenge I faced in this assignment was to understand the RE
 ### **Account-Level Locking**
 - Each account has its own lock to prevent race conditions
 - Only one transaction can access an account at a time
-- 20-second timeout prevents deadlocks and allows system to run without waiting too much to lock
+- 20-second timeout prevents starvation and allows system to run without waiting too much to lock
 - Prevents TOCTOU (Time of Check to Time of Use) vulnerabilities
 
 ### **Concurrent Access**
