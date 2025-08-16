@@ -20,7 +20,7 @@ The most difficult challenge I faced in this assignment was to understand the RE
 - **Simple String Responses**: All API responses return human-readable strings
 
 ## Pre-loaded Accounts 
-- Account: `123456789` - Balance: $1,000.00
+- Account: `123456789` - Balance: $1,200.00
 - Account: `987654321` - Balance: $2,500.00
 - Account: `555555555` - Balance: $500.00
 
