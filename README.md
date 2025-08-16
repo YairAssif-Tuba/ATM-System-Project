@@ -46,40 +46,13 @@ The most difficult challenge I faced in this assignment was to understand the RE
 ### 4. List All Accounts
 - **URL**: `GET /accounts`
 
-## Quick Start
-
-The ATM system server is running and ready to use. You can interact with it using the following methods:
-
-**Live Server**: https://atm-system-project.ew.r.appspot.com
-
-### Test with curl (in cmd, if installed)
-```bash
-# Get balance
-curl -X GET https://atm-system-project.ew.r.appspot.com/accounts/123456789/balance
-
-# Deposit money
-curl -X POST https://atm-system-project.ew.r.appspot.com/accounts/123456789/deposit \
--H "Content-Type: application/json" \
--d '{"amount": 100.00}'
-
-# Withdraw money
-curl -X POST https://atm-system-project.ew.r.appspot.com/accounts/123456789/withdraw \
--H "Content-Type: application/json" \
--d '{"amount": 50.00}'
-```
-
-### Test with Python
-```bash
-# Run the locking test - generates a random account number and then deposits 50 dollars using 1-50 (random number) different threads (1 dollar each). Then, we withdrawl 20 dollars using 1-20 different threads (1 dollar each).
-python test_locking.py
-```
 
 ## Security Features
 
 ### **Account-Level Locking**
 - Each account has its own lock to prevent race conditions
 - Only one transaction can access an account at a time
-- 10-second timeout prevents deadlocks and allows system to run without waiting too much to lock
+- 20-second timeout prevents deadlocks and allows system to run without waiting too much to lock
 - Prevents TOCTOU (Time of Check to Time of Use) vulnerabilities
 
 ### **Concurrent Access**
@@ -102,24 +75,13 @@ ATM System Project/
 ├── app.yaml           # Server configuration
 └── README.md          # Project documentation
 ```
+## Quick Start
+
+The ATM system server is running and ready to use. You can interact with it using the following methods:
+
+**Live Server**: https://atm-system-project.ew.r.appspot.com
 
 ## How to Perform API Calls
-
-### Using curl
-```bash
-# Get balance
-curl -X GET https://atm-system-project.ew.r.appspot.com/accounts/123456789/balance
-
-# Deposit money
-curl -X POST https://atm-system-project.ew.r.appspot.com/accounts/123456789/deposit \
--H "Content-Type: application/json" \
--d '{"amount": 200.00}'
-
-# Withdraw money
-curl -X POST https://atm-system-project.ew.r.appspot.com/accounts/123456789/withdraw \
--H "Content-Type: application/json" \
--d '{"amount": 100.00}'
-```
 
 ### Using Python requests
 ```python
