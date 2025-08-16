@@ -4,7 +4,7 @@ This is a secure, thread-safe ATM system server built with Flask. The server pro
 
 ## General Approach
 
-The ATM system follows a client-server architecture where the server handles all business logic and data management. The server uses in-memory storage for simplicity and implements thread-safe operations using Python's threading module. Each account has its own lock to prevent concurrent access issues, especially TOCTOU. In addition, each locking try has a timeout of 10 seconds. I was thinking if I should stick with it or not (because then when asking >100 requests in parallel we will face timeout for sure since each operation takes 0.1 second for readability) but I decided to do so since it resembles more to a real banking system.
+The ATM system follows a client-server architecture where the server handles all business logic and data management. The server uses in-memory storage for simplicity and implements thread-safe operations using Python's threading module. Each account has its own lock to prevent concurrent access issues, especially TOCTOU. In addition, each locking try has a timeout of 20 seconds. I was thinking if I should stick with it or not (because then when asking >200 requests in parallel we will face timeout for sure since each operation sleeps 0.1 seconds for readability) but I decided to do so since it resembles more to a real banking system.
 
 ## Challenges Faced
 
@@ -70,7 +70,7 @@ curl -X POST https://atm-system-project.ew.r.appspot.com/accounts/123456789/with
 
 ### Test with Python
 ```bash
-# Run the locking test
+# Run the locking test - generates a random account number and then deposits 50 dollars using 1-50 (random number) different threads (1 dollar each). Then, we withdrawl 20 dollars using 1-20 different threads (1 dollar each).
 python test_locking.py
 ```
 
@@ -91,16 +91,6 @@ python test_locking.py
 - **400**: Invalid request (missing amount, insufficient balance, negative amounts)
 - **423**: Account is busy (locked by another transaction)
 - **500**: Server errors
-
-## Testing
-
-```bash
-# Run the locking test with random account and thread IDs
-python test_locking.py
-
-# Test basic operations manually
-curl -X GET https://atm-system-project.ew.r.appspot.com/accounts/123456789/balance
-```
 
 ## Project Structure
 
@@ -153,5 +143,11 @@ response = requests.post(
 )
 print(response.text)
 ```
+## Testing
 
+```bash
+# Run the locking test with random account and thread IDs. Create 50 threads to deposit concurrently, and then 20 to withdrawl concurrently.
+python test_locking.py
+
+```
 
